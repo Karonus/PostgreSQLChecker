@@ -3,14 +3,14 @@ package main
 import (
 	"database/sql"
 	_ "github.com/lib/pq"
-	"log"
 	"os"
 )
 
 func main() {
-	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL")+"?sslmode=disable")
 	if err != nil {
-		log.Fatal(err)
+		os.Exit(-1)
+		return
 	}
 
 	err = db.Ping()
